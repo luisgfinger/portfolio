@@ -1,73 +1,94 @@
-# React + TypeScript + Vite
+# Portfolio Pessoal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicacao web desenvolvida para servir como portfolio pessoal, reunindo apresentacao profissional, projetos e canais de contato em uma interface moderna, responsiva e com suporte a tema claro/escuro.
 
-Currently, two official plugins are available:
+## Sobre o projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Este projeto foi criado com foco em construir uma pagina pessoal para apresentar:
 
-## React Compiler
+- quem eu sou
+- minhas habilidades e experiencias
+- projetos desenvolvidos
+- formas de contato
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+No estado atual, a base da interface ja inclui uma navegacao responsiva com menu mobile e alternancia de tema persistida no navegador.
 
-## Expanding the ESLint configuration
+## Funcionalidades atuais
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- navegacao com links para `Home`, `Sobre`, `Projetos` e `Contato`
+- menu hamburguer para telas menores
+- alternancia entre tema claro e escuro
+- persistencia do tema escolhido com `localStorage`
+- estrutura inicial pronta para expansao das secoes do portfolio
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tecnologias utilizadas
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS 4
+- ESLint
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Como executar o projeto
+
+### Pre-requisitos
+
+- Node.js instalado
+- npm instalado
+
+### Instalacao
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Ambiente de desenvolvimento
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+### Gerar build de producao
+
+```bash
+npm run build
+```
+
+### Visualizar build localmente
+
+```bash
+npm run preview
+```
+
+## Scripts disponiveis
+
+- `npm run dev`: inicia o servidor de desenvolvimento
+- `npm run build`: gera a build de producao
+- `npm run preview`: executa a visualizacao da build
+- `npm run lint`: analisa o codigo com ESLint
+
+## Estrutura principal
+
+```text
+src/
+  App.tsx
+  main.tsx
+  index.css
+  components/
+    buttons/
+    layout/
+  assets/
+public/
+```
+
+## Objetivo
+
+O objetivo deste portfolio e centralizar minha apresentacao profissional em um unico lugar, com identidade visual consistente, boa experiencia em dispositivos moveis e uma base facil de manter e evoluir.
+
+## Proximos passos
+
+- adicionar a secao principal de apresentacao
+- incluir cards de projetos com links
+- criar secao de contato com redes sociais
+- adicionar animacoes e refinamentos visuais
+- publicar a aplicacao em producao
