@@ -11,7 +11,7 @@ export function Hero() {
         <h2>Luis Gustavo Grando Finger</h2>
         <p className="text-xl">Engenheiro de Software</p>
         <p className="text-lg">Desenvolvedor Full-Stack</p>
-        <p className="text-base text-center max-w-sm md:max-w-xl">Desenvolvedor Full Stack focado em criar aplicações escaláveis e soluções em nuvem. 
+        <p className="text-base text-center max-w-sm md:max-w-xl px-4 md:px-0">Desenvolvedor Full Stack focado em criar aplicações escaláveis e soluções em nuvem. 
           Transformo ideias em sistemas robustos utilizando tecnologias modernas e arquitetura cloud.
         </p>
         <div className="flex gap-4">
