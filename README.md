@@ -84,11 +84,3 @@ public/
 ## Objetivo
 
 O objetivo deste portfólio é centralizar minha apresentação profissional em um único lugar, com identidade visual consistente, boa experiência em dispositivos móveis e uma base fácil de manter e evoluir.
-
-## Próximos passos
-
-- adicionar a seção principal de apresentação
-- incluir cards de projetos com links
-- criar seção de contato com redes sociais
-- adicionar animações e refinamentos visuais
-- publicar a aplicação em produção

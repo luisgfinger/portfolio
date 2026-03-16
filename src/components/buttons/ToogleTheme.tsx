@@ -14,7 +14,7 @@ export function ToogleTheme({ onClick, darkTheme }: ToogleThemeProps) {
       aria-label="Set Light Theme"
       className="flex items-center justify-center p-2"
     >
-      <img src={darkTheme ? lightIcon : nightIcon } alt="" className="w-6 h-6" />
+      <img src={darkTheme ? lightIcon : nightIcon } alt="" className="w-8 h-8" />
     </button>
   );
 }

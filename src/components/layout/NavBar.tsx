@@ -27,24 +27,24 @@ export function Navbar() {
   }, [darkMode]);
 
   return (
-    <header className="w-full border-b border-[var(--border-color)] bg-[var(--background)]">
+    <header className="w-full border-b border-[var(--border-color)] bg-[var(--surface)]">
       <div className="container flex items-center justify-between py-4">
         <h3 className="mx-4 font-bold">Luis Gustavo</h3>
 
         <nav className="hidden gap-8 md:flex">
-          <a href="#home" className="hover:text-[var(--primary)]">
+          <a href="#home" className="hover:text-[var(--text-primary)]">
             Home
           </a>
 
-          <a href="#about" className="hover:text-[var(--primary)]">
+          <a href="#about" className="hover:text-[var(--text-primary)]">
             Sobre
           </a>
 
-          <a href="#projects" className="hover:text-[var(--primary)]">
+          <a href="#projects" className="hover:text-[var(--text-primary)]">
             Projetos
           </a>
 
-          <a href="#contact" className="hover:text-[var(--primary)]">
+          <a href="#contact" className="hover:text-[var(--text-primary)]">
             Contato
           </a>
         </nav>
@@ -57,7 +57,7 @@ export function Navbar() {
 
       {menuOpen && (
         <nav className="border-t border-[var(--border-color)] md:hidden">
-          <div className="flex flex-col gap-4 p-4">
+          <div className="flex flex-col gap-4 p-4 items-center">
             <a href="#home">Home</a>
             <a href="#about">Sobre</a>
             <a href="#projects">Projetos</a>
