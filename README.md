@@ -2,6 +2,8 @@
 
 Aplicação web desenvolvida para servir como portfólio pessoal, reunindo apresentação profissional, projetos e canais de contato em uma interface moderna, responsiva e com suporte a tema claro/escuro.
 
+Acesse em: https://luisgrandoportfolio.netlify.app/
+
 ## Sobre o projeto
 
 Este projeto foi criado com foco em construir uma página pessoal para apresentar:
