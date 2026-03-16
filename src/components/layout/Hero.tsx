@@ -19,7 +19,7 @@ export function Hero() {
             href="https://github.com/luisgfinger"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 bg-blue-500 rounded-lg hover:opacity-90 transition-opacity shadow-md"
+            className="flex items-center gap-2 px-6 py-3 bg-blue-500/50 rounded-lg hover:opacity-90 transition-opacity shadow-md"
           >
             <Github className="w-5 h-5" />
             GitHub
