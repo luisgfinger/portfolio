@@ -1,25 +1,25 @@
-# Portfolio Pessoal
+# Portfólio Pessoal
 
-Aplicacao web desenvolvida para servir como portfolio pessoal, reunindo apresentacao profissional, projetos e canais de contato em uma interface moderna, responsiva e com suporte a tema claro/escuro.
+Aplicação web desenvolvida para servir como portfólio pessoal, reunindo apresentação profissional, projetos e canais de contato em uma interface moderna, responsiva e com suporte a tema claro/escuro.
 
 ## Sobre o projeto
 
-Este projeto foi criado com foco em construir uma pagina pessoal para apresentar:
+Este projeto foi criado com foco em construir uma página pessoal para apresentar:
 
 - quem eu sou
-- minhas habilidades e experiencias
+- minhas habilidades e experiências
 - projetos desenvolvidos
 - formas de contato
 
-No estado atual, a base da interface ja inclui uma navegacao responsiva com menu mobile e alternancia de tema persistida no navegador.
+No estado atual, a base da interface já inclui uma navegação responsiva com menu mobile e alternância de tema persistida no navegador.
 
 ## Funcionalidades atuais
 
-- navegacao com links para `Home`, `Sobre`, `Projetos` e `Contato`
-- menu hamburguer para telas menores
-- alternancia entre tema claro e escuro
-- persistencia do tema escolhido com `localStorage`
-- estrutura inicial pronta para expansao das secoes do portfolio
+- navegação com links para `Home`, `Sobre`, `Projetos` e `Contato`
+- menu hambúrguer para telas menores
+- alternância entre tema claro e escuro
+- persistência do tema escolhido com `localStorage`
+- estrutura inicial pronta para expansão das seções do portfólio
 
 ## Tecnologias utilizadas
 
@@ -31,12 +31,12 @@ No estado atual, a base da interface ja inclui uma navegacao responsiva com menu
 
 ## Como executar o projeto
 
-### Pre-requisitos
+### Pré-requisitos
 
 - Node.js instalado
 - npm instalado
 
-### Instalacao
+### Instalação
 
 ```bash
 npm install
@@ -48,7 +48,7 @@ npm install
 npm run dev
 ```
 
-### Gerar build de producao
+### Gerar build de produção
 
 ```bash
 npm run build
@@ -60,12 +60,12 @@ npm run build
 npm run preview
 ```
 
-## Scripts disponiveis
+## Scripts disponíveis
 
 - `npm run dev`: inicia o servidor de desenvolvimento
-- `npm run build`: gera a build de producao
-- `npm run preview`: executa a visualizacao da build
-- `npm run lint`: analisa o codigo com ESLint
+- `npm run build`: gera a build de produção
+- `npm run preview`: executa a visualização da build
+- `npm run lint`: analisa o código com ESLint
 
 ## Estrutura principal
 
@@ -83,12 +83,12 @@ public/
 
 ## Objetivo
 
-O objetivo deste portfolio e centralizar minha apresentacao profissional em um unico lugar, com identidade visual consistente, boa experiencia em dispositivos moveis e uma base facil de manter e evoluir.
+O objetivo deste portfólio é centralizar minha apresentação profissional em um único lugar, com identidade visual consistente, boa experiência em dispositivos móveis e uma base fácil de manter e evoluir.
 
-## Proximos passos
+## Próximos passos
 
-- adicionar a secao principal de apresentacao
+- adicionar a seção principal de apresentação
 - incluir cards de projetos com links
-- criar secao de contato com redes sociais
-- adicionar animacoes e refinamentos visuais
-- publicar a aplicacao em producao
+- criar seção de contato com redes sociais
+- adicionar animações e refinamentos visuais
+- publicar a aplicação em produção
