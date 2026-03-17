@@ -1,6 +1,7 @@
 import { About } from './components/layout/About'
 import { Hero } from './components/layout/Hero'
 import { Navbar } from './components/layout/NavBar'
+import { Projects } from './components/layout/Projects'
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <Projects/>
     </>
   )
 }

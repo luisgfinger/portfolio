@@ -1,11 +1,11 @@
 import { ProfilePicture } from "../general/ProfilePicture"
-
-import {Github, Linkedin} from "lucide-react";
+import { GithubIcon } from "../icons/GitHubIcon";
+import {Linkedin} from "lucide-react"
 
 export function Hero() {
 
   return (
-    <section id="home" className="w-full bg-[var(--background)] flex flex-col items-center py-16">
+    <section className="w-full md:h-screen bg-[var(--background)] flex flex-col items-center py-16 border-1 border-[var(--border-color)]/20">
       <div className="flex flex-col items-center gap-4">
         <ProfilePicture />
         <h2>Luis Gustavo Grando Finger</h2>
@@ -21,7 +21,7 @@ export function Hero() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-6 py-3 bg-blue-500/50 rounded-lg hover:opacity-90 transition-opacity shadow-md"
           >
-            <Github className="w-5 h-5" />
+            <GithubIcon />
             GitHub
           </a>
           <a

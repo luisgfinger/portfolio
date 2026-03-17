@@ -27,7 +27,7 @@ export function Navbar() {
   }, [darkMode]);
 
   return (
-    <header className="w-full border-b border-[var(--border-color)] bg-[var(--surface)]">
+    <header id="home" className="w-full border-b-1 border-[var(--border-color)]/20 bg-[var(--surface)]">
       <div className="container flex items-center justify-between py-4">
         <h3 className="mx-4 font-bold">Luis Gustavo</h3>
 
