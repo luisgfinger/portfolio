@@ -35,7 +35,7 @@ export function Projects() {
       image: crashesPicture,
       title: "Crashes Data Project",
       description:
-        "Pipeline de engenharia de dados em camadas (Bronze → Silver → Gold) no AWS S3, desenvolvido com Python, Pandas e PyArrow, utilizando o conjunto de dados de colisões de veículos motorizados de Nova York (NYC). Implementa contratos de esquema (schema), regras de qualidade de dados e armazenamento em formato Parquet particionado. Integrado com AWS Glue Crawlers e o Data Catalog para permitir análises serverless com o Amazon Athena.",
+        "Pipeline de dados em camadas (Bronze → Silver → Gold) no AWS S3, usando Python, Pandas e PyArrow. Aplica validação de schema e regras de qualidade, com dados em Parquet particionado. Integrado ao AWS Glue e Data Catalog para consultas serverless via Athena.",
       stacks: [
         "Python",
         "Pandas",
@@ -94,14 +94,13 @@ export function Projects() {
     currentProject === projects.length - 1 ? 0 : currentProject + 1;
 
   return (
-    <section className="w-full bg-[var(--background)] py-8 px-4 md:px-8 flex flex-col items-center">
-      <h2 className="py-6">Projetos</h2>
+    <section id="projects" className="w-full bg-[var(--background)] py-8 px-4 pb-14 md:px-8 flex flex-col items-center">
+      <h2  className="py-6">Projetos</h2>
 
       <div className="flex items-center justify-center gap-4 w-full">
         <NextButton onClick={prevSlide} isPrevious />
 
         <div
-          id="projects"
           className="relative w-full max-w-[1200px] h-auto select-none touch-pan-y"
           onTouchStart={(e) => handleStart(e.touches[0].clientX)}
           onTouchMove={(e) => handleMove(e.touches[0].clientX)}

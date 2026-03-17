@@ -4,6 +4,8 @@ import { ToogleTheme } from "../buttons/ToogleTheme";
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
 
@@ -26,8 +28,38 @@ export function Navbar() {
     }
   }, [darkMode]);
 
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < lastScrollY) {
+        setShowNavbar(true);
+      } else {
+        setShowNavbar(false);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <header id="home" className="w-full border-b-1 border-[var(--border-color)]/20 bg-[var(--surface)]">
+    <header
+      className={`
+      fixed top-0 left-0 w-full z-50
+      transition-transform duration-300
+      ${showNavbar ? "translate-y-0" : "-translate-y-full"}
+      border-b border-[var(--border-color)]/20
+      bg-[var(--surface)]
+      `}
+    >
       <div className="container flex items-center justify-between py-4">
         <h3 className="mx-4 font-bold">Luis Gustavo</h3>
 
@@ -43,6 +75,9 @@ export function Navbar() {
           <a href="#projects" className="hover:text-[var(--text-primary)]">
             Projetos
           </a>
+          <a href="#skills" className="hover:text-[var(--text-primary)]">
+            Habilidades
+          </a>
 
           <a href="#contact" className="hover:text-[var(--text-primary)]">
             Contato
@@ -50,18 +85,25 @@ export function Navbar() {
         </nav>
 
         <span className="flex items-center gap-2">
-          <ToogleTheme darkTheme={darkMode} onClick={() => setDarkMode((prev) => !prev)} />
-          <BurgerMenu darkTheme={darkMode} onClick={() => setMenuOpen((prev) => !prev)} />
+          <ToogleTheme
+            darkTheme={darkMode}
+            onClick={() => setDarkMode((prev) => !prev)}
+          />
+          <BurgerMenu
+            darkTheme={darkMode}
+            onClick={() => setMenuOpen((prev) => !prev)}
+          />
         </span>
       </div>
 
       {menuOpen && (
         <nav className="border-t border-[var(--border-color)] md:hidden">
           <div className="flex flex-col gap-4 p-4 items-center">
-            <a href="#home">Home</a>
-            <a href="#about">Sobre</a>
-            <a href="#projects">Projetos</a>
-            <a href="#contact">Contato</a>
+            <a href="#home" onClick={() => setMenuOpen((prev) => !prev)}>Home</a>
+            <a href="#about" onClick={() => setMenuOpen((prev) => !prev)}>Sobre</a>
+            <a href="#projects" onClick={() => setMenuOpen((prev) => !prev)}>Projetos</a>
+            <a href="#skills" onClick={() => setMenuOpen((prev) => !prev)}>Habilidades</a>
+            <a href="#contact" onClick={() => setMenuOpen((prev) => !prev)}>Contato</a>
           </div>
         </nav>
       )}

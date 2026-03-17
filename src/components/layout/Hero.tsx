@@ -5,7 +5,7 @@ import {Linkedin} from "lucide-react"
 export function Hero() {
 
   return (
-    <section className="w-full md:h-screen bg-[var(--background)] flex flex-col items-center py-16 border-1 border-[var(--border-color)]/20">
+    <section id="home" className="w-full md:h-screen bg-[var(--background)] flex flex-col items-center justify-center py-16 md:py-0 border border-[var(--border-color)]/20">
       <div className="flex flex-col items-center gap-4">
         <ProfilePicture />
         <h2>Luis Gustavo Grando Finger</h2>
