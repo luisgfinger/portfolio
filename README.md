@@ -6,6 +6,8 @@ Este projeto resume bem minha forma de estruturar interfaces, organizar componen
 
 Demo online: [luisgrandoportfolio.netlify.app](https://luisgrandoportfolio.netlify.app/)
 
+![Demo do sistema](./src/assets/gifs/gif-1.gif)
+
 ## Índice
 
 - [Visão geral](#visao-geral)
