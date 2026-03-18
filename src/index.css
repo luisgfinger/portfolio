@@ -112,7 +112,7 @@ h3 {
   font-weight: 600;
 }
 
-p {
+p, input, textarea {
   color: var(--text-secondary);
   line-height: 1.6;
 }
