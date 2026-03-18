@@ -1,42 +1,117 @@
-# Portfólio Pessoal
+# Portfólio Pessoal | Luis Gustavo Grando Finger
 
-Aplicação web desenvolvida para servir como portfólio pessoal, reunindo apresentação profissional, projetos e canais de contato em uma interface moderna, responsiva e com suporte a tema claro/escuro.
+Aplicação web desenvolvida para apresentar minha trajetória como Engenheiro de Software, destacar projetos relevantes e facilitar o contato profissional em uma experiência moderna, responsiva e objetiva.
 
-Acesse em: https://luisgrandoportfolio.netlify.app/
+Este projeto resume bem minha forma de estruturar interfaces, organizar componentes reutilizáveis, integrar serviços externos e transformar apresentação profissional em produto digital.
 
-## Sobre o projeto
+Demo online: [luisgrandoportfolio.netlify.app](https://luisgrandoportfolio.netlify.app/)
 
-Este projeto foi criado com foco em construir uma página pessoal para apresentar:
+## Índice
 
-- quem eu sou
-- minhas habilidades e experiências
-- projetos desenvolvidos
-- formas de contato
+- [Visão geral](#visao-geral)
+- [O que este projeto demonstra](#o-que-este-projeto-demonstra)
+- [Funcionalidades](#funcionalidades)
+- [Stack e ferramentas](#stack-e-ferramentas)
+- [Arquitetura do front-end](#arquitetura-do-front-end)
+- [Como executar localmente](#como-executar-localmente)
+- [Variáveis de ambiente](#variaveis-de-ambiente)
+- [Scripts disponíveis](#scripts-disponiveis)
+- [Estrutura de pastas](#estrutura-de-pastas)
+- [Próximos passos](#proximos-passos)
+- [Contato](#contato)
 
-No estado atual, a base da interface já inclui uma navegação responsiva com menu mobile e alternância de tema persistida no navegador.
+<a id="visao-geral"></a>
+## Visão geral
 
-## Funcionalidades atuais
+Este repositório contém uma SPA construída com React, TypeScript e Vite para consolidar minha presença profissional em um único ambiente. A aplicação foi pensada para ser direta na comunicação, agradável na navegação e consistente em diferentes tamanhos de tela.
 
-- navegação com links para `Home`, `Sobre`, `Projetos` e `Contato`
-- menu hambúrguer para telas menores
-- alternância entre tema claro e escuro
-- persistência do tema escolhido com `localStorage`
-- estrutura inicial pronta para expansão das seções do portfólio
+Hoje, o projeto reúne:
 
-## Tecnologias utilizadas
+- seção inicial com posicionamento profissional e links externos;
+- apresentação resumida da minha atuação como desenvolvedor Full Stack;
+- vitrine de projetos com navegação interativa;
+- bloco de habilidades técnicas;
+- formulário de contato integrado a um endpoint externo;
+- suporte a tema claro e escuro com persistência da preferência do usuário.
+
+<a id="o-que-este-projeto-demonstra"></a>
+## O que este projeto demonstra
+
+- Organização de interface em componentes reutilizáveis e responsabilidades bem separadas.
+- Construção de experiência responsiva com atenção à navegação em mobile e desktop.
+- Gerenciamento simples e eficiente de estado local para tema, menu e formulário.
+- Integração do front-end com API em AWS Lambda para envio de mensagens, com tratamento de timeout e feedback visual.
+- Preocupação com experiência de uso, incluindo rolagem suave, notificações e interação por swipe no carrossel de projetos.
+- Aplicação de medidas práticas de segurança no fluxo de contato, com CORS restrito por domínio e campo honeypot contra bots.
+
+<a id="funcionalidades"></a>
+## Funcionalidades
+
+- Navegação por âncoras entre as seções `Home`, `Sobre`, `Projetos`, `Habilidades` e `Contato`.
+- Barra de navegação fixa com comportamento de ocultação ao rolar a página.
+- Menu mobile com alternância por botão hambúrguer.
+- Alternância entre tema claro e escuro.
+- Persistência do tema com `localStorage` e respeito à preferência inicial do sistema.
+- Carrossel de projetos com navegação por botões, indicadores visuais e suporte a arraste no mobile.
+- Exibição de projeto com vídeo ou imagem, stack utilizada e links para repositório e demonstração.
+- Formulário de contato com estado de envio, validação básica no cliente, campo honeypot e feedback com `react-toastify`.
+- Comunicação do front-end com uma API hospedada em AWS Lambda para processar o envio de mensagens.
+- Encaminhamento do e-mail de contato via Amazon SES a partir da camada serverless.
+- Controle de CORS no domínio autorizado para reforçar a segurança da integração do formulário.
+
+<a id="stack-e-ferramentas"></a>
+## Stack e ferramentas
+
+### Front-end
 
 - React 19
 - TypeScript
 - Vite
-- Tailwind CSS 4
-- ESLint
 
-## Como executar o projeto
+### Estilização e UI
+
+- Tailwind CSS 4
+- CSS com design tokens via variáveis customizadas
+- Lucide React
+
+### Experiência e integração
+
+- React Toastify
+- `fetch` com `AbortController` para timeout no envio do formulário
+- API serverless em AWS Lambda
+- Amazon SES para disparo dos e-mails de contato
+
+### Qualidade e suporte ao desenvolvimento
+
+- ESLint
+- TypeScript Project References
+
+<a id="arquitetura-do-front-end"></a>
+## Arquitetura do front-end
+
+A estrutura foi dividida para refletir responsabilidades claras:
+
+- `components/layout`: seções principais da página, como hero, projetos, habilidades e contato.
+- `components/cards`: composição de cartões reutilizáveis para exibição de projetos.
+- `components/buttons`: ações visuais e controles de interface, como tema, navegação e menu.
+- `components/general`: elementos de apoio reutilizáveis, como foto de perfil e tabela de habilidades.
+- `hooks`: lógica compartilhada de comportamento, como o gerenciamento de tema.
+- `api`: integração com serviços externos.
+- `api`: integração do front-end com o endpoint responsável pelo envio de mensagens.
+- `types`: contratos tipados para os dados da aplicação.
+- `utils`: funções utilitárias desacopladas da camada visual.
+
+No fluxo de contato, o front-end envia os dados do formulário para uma API exposta via AWS Lambda. Essa camada intermediária processa a requisição, aplica as regras de CORS para o domínio autorizado e utiliza o Amazon SES para efetivar o envio do e-mail. No cliente, o formulário também inclui um campo honeypot, reduzindo envios automatizados por bots sem prejudicar a experiência do usuário.
+
+<a id="como-executar-localmente"></a>
+## Como executar localmente
 
 ### Pré-requisitos
 
-- Node.js instalado
-- npm instalado
+- Node.js instalado.
+- npm instalado.
+
+Recomendo utilizar uma versão LTS atual do Node.js para manter compatibilidade com o ecossistema do Vite.
 
 ### Instalação
 
@@ -50,39 +125,71 @@ npm install
 npm run dev
 ```
 
-### Gerar build de produção
+### Build de produção
 
 ```bash
 npm run build
 ```
 
-### Visualizar build localmente
+### Preview local da build
 
 ```bash
 npm run preview
 ```
 
+<a id="variaveis-de-ambiente"></a>
+## Variáveis de ambiente
+
+Para que o formulário de contato funcione corretamente, defina a variável abaixo em um arquivo `.env` na raiz do projeto:
+
+```bash
+VITE_CONTACT_API_URL=https://seu-endpoint-de-contato
+```
+
+Sem essa configuração, o envio de mensagens será bloqueado pela própria aplicação.
+
+<a id="scripts-disponiveis"></a>
 ## Scripts disponíveis
 
-- `npm run dev`: inicia o servidor de desenvolvimento
-- `npm run build`: gera a build de produção
-- `npm run preview`: executa a visualização da build
-- `npm run lint`: analisa o código com ESLint
+- `npm run dev`: inicia o servidor de desenvolvimento com recarga automática.
+- `npm run build`: compila o TypeScript e gera a versão otimizada de produção.
+- `npm run preview`: executa uma pré-visualização local da build gerada.
+- `npm run lint`: analisa o código com ESLint.
 
-## Estrutura principal
+<a id="estrutura-de-pastas"></a>
+## Estrutura de pastas
 
 ```text
 src/
-  App.tsx
-  main.tsx
-  index.css
-  components/
-    buttons/
-    layout/
-  assets/
-public/
+├─ api/
+│  └─ contactApi.ts
+├─ assets/
+│  ├─ icons/
+│  ├─ pictures/
+│  └─ videos/
+├─ components/
+│  ├─ buttons/
+│  ├─ cards/
+│  ├─ general/
+│  ├─ icons/
+│  └─ layout/
+├─ hooks/
+│  └─ useTheme.ts
+├─ public/
+├─ types/
+│  └─ contact.ts
+├─ utils/
+│  └─ theme.ts
+├─ App.tsx
+├─ index.css
+└─ main.tsx
 ```
 
-## Objetivo
+<a id="contato"></a>
+## Contato
 
-O objetivo deste portfólio é centralizar minha apresentação profissional em um único lugar, com identidade visual consistente, boa experiência em dispositivos móveis e uma base fácil de manter e evoluir.
+- Email: luisgfinger@gmail.com
+- LinkedIn: [linkedin.com/in/luis-gustavo-grando-finger-497596206](https://www.linkedin.com/in/luis-gustavo-grando-finger-497596206/)
+- GitHub: [github.com/luisgfinger](https://github.com/luisgfinger)
+
+Se fizer sentido para a vaga ou projeto que você está avaliando, fico à disposição para conversar.
