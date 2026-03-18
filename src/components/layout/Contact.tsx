@@ -2,15 +2,11 @@ import { useState } from "react";
 import { Linkedin } from "lucide-react";
 import { toast } from "react-toastify";
 import { GithubIcon } from "../icons/GitHubIcon";
+import { sendContactMessage } from "../../api/contactApi";
+import type { ContactFormData } from "../../types/contact";
 
 interface ContactProps {
   darkMode: boolean;
-}
-
-interface ContactFormData {
-  name: string;
-  email: string;
-  message: string;
 }
 
 export function Contact({ darkMode }: ContactProps) {
@@ -39,19 +35,7 @@ export function Contact({ darkMode }: ContactProps) {
     try {
       setIsSending(true);
 
-      console.log("Dados enviados:", formData);
-
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          const success = true;
-
-          if (success) {
-            resolve(true);
-          } else {
-            reject(new Error("Falha no envio"));
-          }
-        }, 1000);
-      });
+      await sendContactMessage(formData);
 
       toast.success("Mensagem enviada com sucesso!");
 
@@ -62,7 +46,13 @@ export function Contact({ darkMode }: ContactProps) {
       });
     } catch (error) {
       console.error("Erro ao enviar formulário:", error);
-      toast.error("Erro ao enviar mensagem. Tente novamente.");
+
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Erro ao enviar mensagem. Tente novamente.";
+
+      toast.error(message);
     } finally {
       setIsSending(false);
     }
