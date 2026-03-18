@@ -2,7 +2,11 @@ import { ProfilePicture } from "../general/ProfilePicture"
 import { GithubIcon } from "../icons/GitHubIcon";
 import {Linkedin} from "lucide-react"
 
-export function Hero() {
+interface HeroProps{
+  darkMode: boolean;
+}
+
+export function Hero({darkMode}:HeroProps) {
 
   return (
     <section id="home" className="w-full md:h-screen bg-[var(--background)] flex flex-col items-center justify-center py-16 md:py-0 border border-[var(--border-color)]/20">
@@ -21,7 +25,7 @@ export function Hero() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-6 py-3 bg-blue-500/50 rounded-lg hover:opacity-90 transition-opacity shadow-md"
           >
-            <GithubIcon />
+            <GithubIcon darkMode={darkMode}/>
             GitHub
           </a>
           <a

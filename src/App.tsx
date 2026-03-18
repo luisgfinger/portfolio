@@ -5,17 +5,19 @@ import { Hero } from './components/layout/Hero'
 import { Navbar } from './components/layout/NavBar'
 import { Projects } from './components/layout/Projects'
 import { Skills } from './components/layout/Skills'
+import { useTheme } from './hooks/useTheme'
 
 function App() {
+  const { darkMode, toggleTheme } = useTheme();
   return (
     <>
     <div className="pt-20 md:pt-0">
-      <Navbar />
-      <Hero />
+      <Navbar darkMode={darkMode} toggleTheme={toggleTheme} />
+      <Hero darkMode={darkMode}/>
       <About />
-      <Projects/> 
+      <Projects darkMode={darkMode}/> 
       <Skills/> 
-      <Contact/>
+      <Contact darkMode={darkMode}/>
       <Footer/>
     </div>
       

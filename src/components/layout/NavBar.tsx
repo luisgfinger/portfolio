@@ -2,31 +2,14 @@ import { useEffect, useState } from "react";
 import { BurgerMenu } from "../buttons/BurgerMenu";
 import { ToogleTheme } from "../buttons/ToogleTheme";
 
-export function Navbar() {
+type NavbarProps = {
+  darkMode: boolean;
+  toggleTheme: () => void;
+};
+
+export function Navbar({darkMode, toggleTheme}: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
-
-  const [darkMode, setDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
-
-    if (savedTheme) {
-      return savedTheme === "dark";
-    }
-
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
-  });
-
-  useEffect(() => {
-    const root = document.documentElement;
-
-    if (darkMode) {
-      root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      root.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -75,6 +58,7 @@ export function Navbar() {
           <a href="#projects" className="hover:text-[var(--text-primary)]">
             Projetos
           </a>
+
           <a href="#skills" className="hover:text-[var(--text-primary)]">
             Habilidades
           </a>
@@ -85,10 +69,7 @@ export function Navbar() {
         </nav>
 
         <span className="flex items-center gap-2">
-          <ToogleTheme
-            darkTheme={darkMode}
-            onClick={() => setDarkMode((prev) => !prev)}
-          />
+          <ToogleTheme darkTheme={darkMode} onClick={toggleTheme} />
           <BurgerMenu
             darkTheme={darkMode}
             onClick={() => setMenuOpen((prev) => !prev)}
@@ -99,11 +80,21 @@ export function Navbar() {
       {menuOpen && (
         <nav className="border-t border-[var(--border-color)] md:hidden">
           <div className="flex flex-col gap-4 p-4 items-center">
-            <a href="#home" onClick={() => setMenuOpen((prev) => !prev)}>Home</a>
-            <a href="#about" onClick={() => setMenuOpen((prev) => !prev)}>Sobre</a>
-            <a href="#projects" onClick={() => setMenuOpen((prev) => !prev)}>Projetos</a>
-            <a href="#skills" onClick={() => setMenuOpen((prev) => !prev)}>Habilidades</a>
-            <a href="#contact" onClick={() => setMenuOpen((prev) => !prev)}>Contato</a>
+            <a href="#home" onClick={() => setMenuOpen(false)}>
+              Home
+            </a>
+            <a href="#about" onClick={() => setMenuOpen(false)}>
+              Sobre
+            </a>
+            <a href="#projects" onClick={() => setMenuOpen(false)}>
+              Projetos
+            </a>
+            <a href="#skills" onClick={() => setMenuOpen(false)}>
+              Habilidades
+            </a>
+            <a href="#contact" onClick={() => setMenuOpen(false)}>
+              Contato
+            </a>
           </div>
         </nav>
       )}

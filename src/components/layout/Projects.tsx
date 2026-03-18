@@ -14,7 +14,11 @@ type Project = {
   liveLink?: string;
 };
 
-export function Projects() {
+interface ProjectsProps{
+  darkMode: boolean;
+}
+
+export function Projects({darkMode}:ProjectsProps) {
   const [currentProject, setCurrentProject] = useState(0);
 
   const startX = useRef(0);
@@ -120,6 +124,7 @@ export function Projects() {
                 stacks={projects[prevIndex].stacks}
                 gitHubLink={projects[prevIndex].gitHubLink}
                 live={projects[prevIndex].liveLink}
+                darkMode={darkMode}
               />
             </div>
 
@@ -132,6 +137,7 @@ export function Projects() {
                 stacks={projects[currentProject].stacks}
                 gitHubLink={projects[currentProject].gitHubLink}
                 live={projects[currentProject].liveLink}
+                darkMode={darkMode}
               />
             </div>
 
@@ -144,6 +150,7 @@ export function Projects() {
                 stacks={projects[nextIndex].stacks}
                 gitHubLink={projects[nextIndex].gitHubLink}
                 live={projects[nextIndex].liveLink}
+                darkMode={darkMode}
               />
             </div>
           </div>
@@ -157,6 +164,7 @@ export function Projects() {
               stacks={projects[currentProject].stacks}
               gitHubLink={projects[currentProject].gitHubLink}
               live={projects[currentProject].liveLink}
+              darkMode={darkMode}
             />
           </div>
         </div>

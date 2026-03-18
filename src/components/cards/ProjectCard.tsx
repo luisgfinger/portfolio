@@ -9,6 +9,7 @@ interface ProjectCardProps {
   stacks: string[];
   gitHubLink?: string;
   live?: string;
+  darkMode: boolean;
 }
 
 export function ProjectCard({
@@ -19,6 +20,7 @@ export function ProjectCard({
   stacks,
   gitHubLink,
   live,
+  darkMode,
 }: ProjectCardProps) {
   return (
     <div className="md:max-w-2xl h-4xl flex flex-col overflow-hidden items-center bg-[var(--surface)] rounded-xl border border-[var(--border-color)]">
@@ -61,7 +63,7 @@ export function ProjectCard({
                 target="_blank"
                 rel="noreferrer"
               >
-                <GithubIcon />
+                <GithubIcon darkMode={darkMode}/>
                 Github
               </a>
             )}

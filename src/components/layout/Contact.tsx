@@ -1,8 +1,13 @@
 import { Linkedin } from "lucide-react";
 import emailIcon from "../../assets/icons/email-icon.svg";
+import emailWhiteIcon from "../../assets/icons/emailWhiteIcon.svg"
 import { GithubIcon } from "../icons/GitHubIcon";
 
-export function Contact() {
+interface ContactProps{
+  darkMode: boolean;
+}
+
+export function Contact({darkMode}:ContactProps) {
   return (
     <section id="contact">
       <div className="w-full bg-[var(--background)] flex flex-col items-center py-16 gap-6">
@@ -21,7 +26,7 @@ export function Contact() {
             hover:scale-[1.02] hover:opacity-90 transition-all duration-200 cursor-pointer"
           >
             <div className="w-6 h-6">
-              <GithubIcon />
+              <GithubIcon darkMode={darkMode}/>
             </div>
             <p>github.com/luisgfinger</p>
           </a>
@@ -44,7 +49,7 @@ export function Contact() {
             hover:scale-[1.02] hover:opacity-90 transition-all duration-200 cursor-pointer"
           >
             <div className="w-6 h-6">
-              <img src={emailIcon} alt="email" className="w-full h-full" />
+              <img src={darkMode? emailWhiteIcon : emailIcon} alt="email" className="w-full h-full" />
             </div>
             <p>luisgfinger@gmail.com</p>
           </a>
