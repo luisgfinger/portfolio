@@ -14,12 +14,13 @@ export function Contact({ darkMode }: ContactProps) {
     name: "",
     email: "",
     message: "",
+    website: "",
   });
 
   const [isSending, setIsSending] = useState(false);
 
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
     const { name, value } = e.target;
 
@@ -43,6 +44,7 @@ export function Contact({ darkMode }: ContactProps) {
         name: "",
         email: "",
         message: "",
+        website: "",
       });
     } catch (error) {
       console.error("Erro ao enviar formulário:", error);
@@ -132,6 +134,16 @@ export function Contact({ darkMode }: ContactProps) {
               rows={5}
               className="w-full rounded-xl p-3 bg-[var(--surface)] border border-gray-300 outline-none
               resize-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            <input
+              type="text"
+              name="website"
+              value={formData.website}
+              onChange={handleChange}
+              autoComplete="off"
+              tabIndex={-1}
+              className="hidden"
             />
 
             <button

@@ -4,32 +4,49 @@ interface ApiResponse {
   message?: string;
 }
 
-export async function sendContactMessage(formData: ContactFormData) {
+export async function sendContactMessage(
+  formData: ContactFormData,
+  timeout = 10000
+) {
   const apiUrl = import.meta.env.VITE_CONTACT_API_URL;
 
   if (!apiUrl) {
     throw new Error("VITE_CONTACT_API_URL não está definida.");
   }
 
-  const response = await fetch(apiUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  });
-
-  let data: ApiResponse | null = null;
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
 
   try {
-    data = await response.json();
-  } catch {
-    data = null;
-  }
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+      signal: controller.signal,
+    });
 
-  if (!response.ok) {
-    throw new Error(data?.message || "Erro ao enviar mensagem.");
-  }
+    let data: ApiResponse | null = null;
 
-  return data;
+    try {
+      data = await response.json();
+    } catch {
+      data = null;
+    }
+
+    if (!response.ok) {
+      throw new Error(data?.message || "Erro ao enviar mensagem.");
+    }
+
+    return data;
+  } catch (error: any) {
+    if (error.name === "AbortError") {
+      throw new Error("Tempo de requisição excedido. Tente novamente.");
+    }
+
+    throw error;
+  } finally {
+    clearTimeout(id);
+  }
 }
