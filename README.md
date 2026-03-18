@@ -32,7 +32,8 @@ Hoje, o projeto reúne:
 - vitrine de projetos com navegação interativa;
 - bloco de habilidades técnicas;
 - formulário de contato integrado a um endpoint externo;
-- suporte a tema claro e escuro com persistência da preferência do usuário.
+- suporte a tema claro e escuro com persistência da preferência do usuário;
+- animação de fundo com arquivos Lottie, incluindo variações para os temas claro e escuro.
 
 <a id="o-que-este-projeto-demonstra"></a>
 ## O que este projeto demonstra
@@ -54,6 +55,7 @@ Hoje, o projeto reúne:
 - Persistência do tema com `localStorage` e respeito à preferência inicial do sistema.
 - Carrossel de projetos com navegação por botões, indicadores visuais e suporte a arraste no mobile.
 - Exibição de projeto com vídeo ou imagem, stack utilizada e links para repositório e demonstração.
+- Animação decorativa de fundo com LottieFiles, integrada à hero section e adaptada ao tema selecionado.
 - Formulário de contato com estado de envio, validação básica no cliente, campo honeypot e feedback com `react-toastify`.
 - Comunicação do front-end com uma API hospedada em AWS Lambda para processar o envio de mensagens.
 - Encaminhamento do e-mail de contato via Amazon SES a partir da camada serverless.
@@ -73,6 +75,7 @@ Hoje, o projeto reúne:
 - Tailwind CSS 4
 - CSS com design tokens via variáveis customizadas
 - Lucide React
+- Lottie React para renderização das animações em JSON
 
 ### Experiência e integração
 
@@ -92,11 +95,12 @@ Hoje, o projeto reúne:
 A estrutura foi dividida para refletir responsabilidades claras:
 
 - `components/layout`: seções principais da página, como hero, projetos, habilidades e contato.
+- `components/animations`: componentes responsáveis pelos efeitos visuais baseados em Lottie.
 - `components/cards`: composição de cartões reutilizáveis para exibição de projetos.
 - `components/buttons`: ações visuais e controles de interface, como tema, navegação e menu.
 - `components/general`: elementos de apoio reutilizáveis, como foto de perfil e tabela de habilidades.
+- `assets/lotties`: arquivos `.json` das animações utilizadas na interface.
 - `hooks`: lógica compartilhada de comportamento, como o gerenciamento de tema.
-- `api`: integração com serviços externos.
 - `api`: integração do front-end com o endpoint responsável pelo envio de mensagens.
 - `types`: contratos tipados para os dados da aplicação.
 - `utils`: funções utilitárias desacopladas da camada visual.
@@ -165,9 +169,11 @@ src/
 │  └─ contactApi.ts
 ├─ assets/
 │  ├─ icons/
+│  ├─ lotties/
 │  ├─ pictures/
 │  └─ videos/
 ├─ components/
+│  ├─ animations/
 │  ├─ buttons/
 │  ├─ cards/
 │  ├─ general/
