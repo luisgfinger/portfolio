@@ -7,6 +7,9 @@ import { Projects } from './components/layout/Projects'
 import { Skills } from './components/layout/Skills'
 import { useTheme } from './hooks/useTheme'
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   const { darkMode, toggleTheme } = useTheme();
   return (
@@ -20,6 +23,11 @@ function App() {
       <Contact darkMode={darkMode}/>
       <Footer/>
     </div>
+    <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        theme="colored"
+      />
       
     </>
   )
