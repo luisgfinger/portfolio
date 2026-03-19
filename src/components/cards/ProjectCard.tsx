@@ -24,7 +24,7 @@ export function ProjectCard({
 }: ProjectCardProps) {
   return (
     <div className="md:max-w-2xl h-4xl flex flex-col overflow-hidden items-center bg-[var(--surface)] rounded-xl border border-[var(--border-color)]">
-      <div className="h-[200px] md:h-[360px] w-full overflow-hidden flex items-center justify-center shrink-0">
+      <div className="h-[200px] md:h-[340px] w-full overflow-hidden flex items-center justify-center shrink-0">
         {video ? (
           <video
             src={video}

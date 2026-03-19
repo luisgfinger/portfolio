@@ -1,7 +1,8 @@
 import { ProjectCard } from "../cards/ProjectCard";
 import apgVideo from "../../assets/videos/apgVideo.mp4";
 import crashesPicture from "../../assets/pictures/crashes-data.png";
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import { NextButton } from "../buttons/NextButton";
 
 type Project = {
@@ -14,17 +15,11 @@ type Project = {
   liveLink?: string;
 };
 
-interface ProjectsProps{
+interface ProjectsProps {
   darkMode: boolean;
 }
 
-export function Projects({darkMode}:ProjectsProps) {
-  const [currentProject, setCurrentProject] = useState(0);
-
-  const startX = useRef(0);
-  const currentX = useRef(0);
-  const isDragging = useRef(false);
-
+export function Projects({ darkMode }: ProjectsProps) {
   const projects: Project[] = [
     {
       video: apgVideo,
@@ -51,134 +46,116 @@ export function Projects({darkMode}:ProjectsProps) {
       ],
       gitHubLink: "https://github.com/luisgfinger/crashes_data_project",
     },
+    {
+      video: apgVideo,
+      title: "Página Web para empresa (demo)",
+      description:
+        "Componente de carousel responsivo desenvolvido com React, utilizando react-responsive-carousel e CSS3. Suporte a múltiplos slides em telas grandes, adaptação para mobile e implementação de scroll suave entre seções da página.",
+      stacks: ["React", "TypeScript", "HTML", "CSS"],
+      gitHubLink: "https://github.com/luisgfinger/apg",
+      liveLink: "https://autopostogrando.netlify.app/",
+    },
   ];
 
-  function nextSlide() {
-    setCurrentProject((prev) =>
-      prev === projects.length - 1 ? 0 : prev + 1
-    );
-  }
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  function prevSlide() {
-    setCurrentProject((prev) =>
-      prev === 0 ? projects.length - 1 : prev - 1
-    );
-  }
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: projects.length > 2,
+    align: "center",
+    dragFree: false,
+    containScroll: "trimSnaps",
+  });
 
-  function handleStart(clientX: number) {
-    startX.current = clientX;
-    currentX.current = clientX;
-    isDragging.current = true;
-  }
+  const scrollPrev = useCallback(() => {
+    if (!emblaApi) return;
+    emblaApi.scrollPrev();
+  }, [emblaApi]);
 
-  function handleMove(clientX: number) {
-    if (!isDragging.current) return;
-    currentX.current = clientX;
-  }
+  const scrollNext = useCallback(() => {
+    if (!emblaApi) return;
+    emblaApi.scrollNext();
+  }, [emblaApi]);
 
-  function handleEnd() {
-    if (!isDragging.current) return;
+  const scrollTo = useCallback(
+    (index: number) => {
+      if (!emblaApi) return;
+      emblaApi.scrollTo(index);
+    },
+    [emblaApi]
+  );
 
-    const distance = currentX.current - startX.current;
-    const threshold = 50;
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
 
-    if (distance > threshold) {
-      prevSlide();
-    } else if (distance < -threshold) {
-      nextSlide();
-    }
+  useEffect(() => {
+    if (!emblaApi) return;
 
-    isDragging.current = false;
-  }
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
 
-  const prevIndex =
-    currentProject === 0 ? projects.length - 1 : currentProject - 1;
-
-  const nextIndex =
-    currentProject === projects.length - 1 ? 0 : currentProject + 1;
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi, onSelect]);
 
   return (
-    <section id="projects" className="w-full bg-[var(--background)] py-8 px-4 pb-14 md:px-8 flex flex-col items-center">
-      <h2  className="py-6">Projetos</h2>
+    <section
+      id="projects"
+      className="w-full bg-[var(--background)] py-8 px-4 pb-14 md:px-8 flex flex-col items-center"
+    >
+      <h2 className="py-6">Projetos</h2>
 
       <div className="flex items-center justify-center gap-4 w-full">
-        <NextButton onClick={prevSlide} isPrevious />
+        <NextButton onClick={scrollPrev} isPrevious />
 
-        <div
-          className="relative w-full max-w-[1200px] h-auto select-none touch-pan-y"
-          onTouchStart={(e) => handleStart(e.touches[0].clientX)}
-          onTouchMove={(e) => handleMove(e.touches[0].clientX)}
-          onTouchEnd={handleEnd}
-          onMouseDown={(e) => handleStart(e.clientX)}
-          onMouseMove={(e) => handleMove(e.clientX)}
-          onMouseUp={handleEnd}
-          onMouseLeave={handleEnd}
-        >
-          <div className="hidden md:flex items-center justify-center relative w-full min-h-[500px] overflow-hidden">
-            <div className="absolute left-0 w-[25%] scale-90 opacity-50 pointer-events-none -translate-x-[15%] transition-all duration-500 ease-in-out">
-              <ProjectCard
-                video={projects[prevIndex].video}
-                image={projects[prevIndex].image}
-                title={projects[prevIndex].title}
-                description={projects[prevIndex].description}
-                stacks={projects[prevIndex].stacks}
-                gitHubLink={projects[prevIndex].gitHubLink}
-                live={projects[prevIndex].liveLink}
-                darkMode={darkMode}
-              />
-            </div>
+        <div className="w-full max-w-[1200px] overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {projects.map((project, index) => {
+              const isActive = index === selectedIndex;
 
-            <div className="relative z-10 w-[50%] translate-x-0 transition-all duration-500 ease-in-out">
-              <ProjectCard
-                video={projects[currentProject].video}
-                image={projects[currentProject].image}
-                title={projects[currentProject].title}
-                description={projects[currentProject].description}
-                stacks={projects[currentProject].stacks}
-                gitHubLink={projects[currentProject].gitHubLink}
-                live={projects[currentProject].liveLink}
-                darkMode={darkMode}
-              />
-            </div>
-
-            <div className="absolute right-0 w-[25%] scale-90 opacity-50 pointer-events-none translate-x-[15%] transition-all duration-500 ease-in-out">
-              <ProjectCard
-                video={projects[nextIndex].video}
-                image={projects[nextIndex].image}
-                title={projects[nextIndex].title}
-                description={projects[nextIndex].description}
-                stacks={projects[nextIndex].stacks}
-                gitHubLink={projects[nextIndex].gitHubLink}
-                live={projects[nextIndex].liveLink}
-                darkMode={darkMode}
-              />
-            </div>
-          </div>
-
-          <div className="md:hidden cursor-grab active:cursor-grabbing transition-all duration-500 ease-in-out">
-            <ProjectCard
-              video={projects[currentProject].video}
-              image={projects[currentProject].image}
-              title={projects[currentProject].title}
-              description={projects[currentProject].description}
-              stacks={projects[currentProject].stacks}
-              gitHubLink={projects[currentProject].gitHubLink}
-              live={projects[currentProject].liveLink}
-              darkMode={darkMode}
-            />
+              return (
+                <div
+                  key={index}
+                  className="min-w-0 flex-[0_0_100%] md:flex-[0_0_50%] px-2 md:px-4"
+                >
+                  <div
+                    className={`transition-[transform,opacity] duration-500 ease-in-out will-change-transform ${
+                      isActive
+                        ? "scale-100 opacity-100"
+                        : "scale-95 opacity-60"
+                    }`}
+                  >
+                    <ProjectCard
+                      video={project.video}
+                      image={project.image}
+                      title={project.title}
+                      description={project.description}
+                      stacks={project.stacks}
+                      gitHubLink={project.gitHubLink}
+                      live={project.liveLink}
+                      darkMode={darkMode}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        <NextButton onClick={nextSlide} />
+        <NextButton onClick={scrollNext} />
       </div>
 
       <div className="dots flex gap-2 justify-center mt-4">
         {projects.map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentProject(index)}
+            onClick={() => scrollTo(index)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              currentProject === index
+              selectedIndex === index
                 ? "bg-blue-600 scale-110"
                 : "bg-gray-400 opacity-50"
             }`}
