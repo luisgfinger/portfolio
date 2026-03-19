@@ -6,6 +6,12 @@ Este projeto resume bem minha forma de estruturar interfaces, organizar componen
 
 Demo online: [luisgrandoportfolio.netlify.app](https://luisgrandoportfolio.netlify.app/)
 
+Versão desktop:
+![Demo do sistema](./src/assets/gifs/gif-1.gif)
+
+Envio de email via AWS Lambda:
+![Demo envio de email](./src/assets/gifs/gif-2.gif)
+
 ## Índice
 
 - [Visão geral](#visao-geral)
