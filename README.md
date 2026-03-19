@@ -23,13 +23,14 @@ Envio de email via AWS Lambda:
 - [Variáveis de ambiente](#variaveis-de-ambiente)
 - [Scripts disponíveis](#scripts-disponiveis)
 - [Estrutura de pastas](#estrutura-de-pastas)
-- [Próximos passos](#proximos-passos)
 - [Contato](#contato)
 
 <a id="visao-geral"></a>
 ## Visão geral
 
-Este repositório contém uma SPA construída com React, TypeScript e Vite para consolidar minha presença profissional em um único ambiente. A aplicação foi pensada para ser direta na comunicação, agradável na navegação e consistente em diferentes tamanhos de tela.
+Este repositório contém o front-end de uma SPA construída com React, TypeScript e Vite para consolidar minha presença profissional em um único ambiente. A aplicação foi pensada para ser direta na comunicação, agradável na navegação e consistente em diferentes tamanhos de tela.
+
+O formulário de contato consome um endpoint externo configurado por variável de ambiente. A interface e o fluxo do cliente estão neste repositório; a implementação do backend não faz parte deste código.
 
 Hoje, o projeto reúne:
 
@@ -47,9 +48,9 @@ Hoje, o projeto reúne:
 - Organização de interface em componentes reutilizáveis e responsabilidades bem separadas.
 - Construção de experiência responsiva com atenção à navegação em mobile e desktop.
 - Gerenciamento simples e eficiente de estado local para tema, menu e formulário.
-- Integração do front-end com API em AWS Lambda para envio de mensagens, com tratamento de timeout e feedback visual.
+- Integração do front-end com endpoint externo para envio de mensagens, com tratamento de timeout e feedback visual.
 - Preocupação com experiência de uso, incluindo rolagem suave, notificações e interação por swipe no carrossel de projetos.
-- Aplicação de medidas práticas de segurança no fluxo de contato, com CORS restrito por domínio e campo honeypot contra bots.
+- Aplicação de medidas práticas de proteção no fluxo de contato, com campo honeypot contra bots e bloqueio do envio quando a URL da API não está configurada.
 
 <a id="funcionalidades"></a>
 ## Funcionalidades
@@ -63,9 +64,7 @@ Hoje, o projeto reúne:
 - Exibição de projeto com vídeo ou imagem, stack utilizada e links para repositório e demonstração.
 - Animação decorativa de fundo com LottieFiles, integrada à hero section e adaptada ao tema selecionado.
 - Formulário de contato com estado de envio, validação básica no cliente, campo honeypot e feedback com `react-toastify`.
-- Comunicação do front-end com uma API hospedada em AWS Lambda para processar o envio de mensagens.
-- Encaminhamento do e-mail de contato via Amazon SES a partir da camada serverless.
-- Controle de CORS no domínio autorizado para reforçar a segurança da integração do formulário.
+- Comunicação do front-end com uma API externa configurada por `VITE_CONTACT_API_URL`.
 
 <a id="stack-e-ferramentas"></a>
 ## Stack e ferramentas
@@ -81,14 +80,15 @@ Hoje, o projeto reúne:
 - Tailwind CSS 4
 - CSS com design tokens via variáveis customizadas
 - Lucide React
+- Embla Carousel
 - Lottie React para renderização das animações em JSON
+- Simple Icons para ícones customizados
 
 ### Experiência e integração
 
 - React Toastify
 - `fetch` com `AbortController` para timeout no envio do formulário
-- API serverless em AWS Lambda
-- Amazon SES para disparo dos e-mails de contato
+- Endpoint externo de contato configurado via variável de ambiente
 
 ### Qualidade e suporte ao desenvolvimento
 
@@ -111,7 +111,7 @@ A estrutura foi dividida para refletir responsabilidades claras:
 - `types`: contratos tipados para os dados da aplicação.
 - `utils`: funções utilitárias desacopladas da camada visual.
 
-No fluxo de contato, o front-end envia os dados do formulário para uma API exposta via AWS Lambda. Essa camada intermediária processa a requisição, aplica as regras de CORS para o domínio autorizado e utiliza o Amazon SES para efetivar o envio do e-mail. No cliente, o formulário também inclui um campo honeypot, reduzindo envios automatizados por bots sem prejudicar a experiência do usuário.
+No fluxo de contato, o front-end envia os dados do formulário para a URL definida em `VITE_CONTACT_API_URL`. Este repositório não inclui a implementação do backend: em produção, essa URL pode apontar para uma API serverless ou qualquer outro serviço responsável por validar e encaminhar a mensagem. No cliente, o formulário inclui um campo honeypot e usa `AbortController` para limitar o tempo de espera da requisição.
 
 <a id="como-executar-localmente"></a>
 ## Como executar localmente
@@ -174,10 +174,12 @@ src/
 ├─ api/
 │  └─ contactApi.ts
 ├─ assets/
+│  ├─ gifs/
 │  ├─ icons/
 │  ├─ lotties/
 │  ├─ pictures/
-│  └─ videos/
+│  ├─ videos/
+│  └─ hero.png
 ├─ components/
 │  ├─ animations/
 │  ├─ buttons/
@@ -188,6 +190,8 @@ src/
 ├─ hooks/
 │  └─ useTheme.ts
 ├─ public/
+│  ├─ favicon.svg
+│  └─ icons.svg
 ├─ types/
 │  └─ contact.ts
 ├─ utils/
