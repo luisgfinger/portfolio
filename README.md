@@ -18,6 +18,7 @@ Envio de email via AWS Lambda:
 - [O que este projeto demonstra](#o-que-este-projeto-demonstra)
 - [Funcionalidades](#funcionalidades)
 - [Stack e ferramentas](#stack-e-ferramentas)
+- [Fluxo de sandbox com Codex](#fluxo-de-sandbox-com-codex)
 - [Arquitetura do front-end](#arquitetura-do-front-end)
 - [Como executar localmente](#como-executar-localmente)
 - [Variáveis de ambiente](#variaveis-de-ambiente)
@@ -94,6 +95,13 @@ Hoje, o projeto reúne:
 
 - ESLint
 - TypeScript Project References
+
+<a id="fluxo-de-sandbox-com-codex"></a>
+## Fluxo de sandbox com Codex
+
+As mudanças experimentais feitas com apoio do Codex são avaliadas na branch `sandbox/codex`.
+
+Esse fluxo permite testar ajustes de interface, conteúdo e refatorações de forma isolada antes de promover apenas o que fizer sentido para a branch principal ou para a branch de trabalho definitiva.
 
 <a id="arquitetura-do-front-end"></a>
 ## Arquitetura do front-end
