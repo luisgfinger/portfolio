@@ -1,5 +1,6 @@
-import { GithubIcon } from "../icons/GitHubIcon";
+import { useId } from "react";
 import { ExternalLink } from "lucide-react";
+import { GithubIcon } from "../icons/GitHubIcon";
 
 interface ProjectCardProps {
   video?: string;
@@ -22,9 +23,14 @@ export function ProjectCard({
   live,
   darkMode,
 }: ProjectCardProps) {
+  const titleId = useId();
+
   return (
-    <div className="md:max-w-2xl h-4xl flex flex-col overflow-hidden items-center bg-[var(--surface)] rounded-xl border border-[var(--border-color)]">
-      <div className="h-[200px] md:h-[340px] w-full overflow-hidden flex items-center justify-center shrink-0">
+    <article
+      aria-labelledby={titleId}
+      className="md:max-w-2xl h-4xl flex flex-col overflow-hidden items-center bg-[var(--surface)] rounded-xl border border-[var(--border-color)]"
+    >
+      <figure className="h-[200px] md:h-[340px] w-full overflow-hidden flex items-center justify-center shrink-0">
         {video ? (
           <video
             src={video}
@@ -32,56 +38,67 @@ export function ProjectCard({
             loop
             muted
             playsInline
+            aria-label={`Demonstração do projeto ${title}`}
             className="w-full h-full object-fill"
           />
         ) : (
-          <img src={image} alt={title} className="w-full h-full object-cover" />
+          <img
+            src={image}
+            alt={`Prévia do projeto ${title}`}
+            className="w-full h-full object-cover"
+          />
         )}
-      </div>
+      </figure>
 
       <div className="py-4 md:py-6 px-6 flex flex-col items-center overflow-hidden h-full">
-        <h3>{title}</h3>
+        <header className="flex flex-col items-center">
+          <h3 id={titleId}>{title}</h3>
+        </header>
         <p className="text-justify">{description}</p>
 
-        <div className="flex flex-col items-center mt-auto">
-          <div className="pt-6 flex flex-wrap gap-2 justify-center">
+        <footer className="flex flex-col items-center mt-auto">
+          <ul className="pt-6 flex flex-wrap gap-2 justify-center" aria-label="Tecnologias utilizadas">
             {stacks.map((stack, index) => (
-              <span
-                key={index}
+              <li
+                key={`${stack}-${index}`}
                 className="px-2 py-1 text-xs rounded bg-[var(--background)]"
               >
                 {stack}
-              </span>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          <div className="flex flex-row pt-6 gap-4">
+          <ul className="flex flex-row pt-6 gap-4" aria-label="Links do projeto">
             {gitHubLink && (
-              <a
-                href={gitHubLink}
-                className="flex items-center gap-1"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <GithubIcon darkMode={darkMode}/>
-                Github
-              </a>
+              <li>
+                <a
+                  href={gitHubLink}
+                  className="flex items-center gap-1"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <GithubIcon darkMode={darkMode} />
+                  GitHub
+                </a>
+              </li>
             )}
 
             {live && (
-              <a
-                href={live}
-                className="flex items-center gap-1"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <ExternalLink className="w-5 h-5" />
-                Página
-              </a>
+              <li>
+                <a
+                  href={live}
+                  className="flex items-center gap-1"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <ExternalLink aria-hidden="true" className="w-5 h-5" />
+                  Página
+                </a>
+              </li>
             )}
-          </div>
-        </div>
+          </ul>
+        </footer>
       </div>
-    </div>
+    </article>
   );
 }

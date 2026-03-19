@@ -40,8 +40,8 @@ export async function sendContactMessage(
     }
 
     return data;
-  } catch (error: any) {
-    if (error.name === "AbortError") {
+  } catch (error: unknown) {
+    if (error instanceof Error && error.name === "AbortError") {
       throw new Error("Tempo de requisição excedido. Tente novamente.");
     }
 

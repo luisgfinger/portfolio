@@ -7,9 +7,18 @@ type NavbarProps = {
   toggleTheme: () => void;
 };
 
-export function Navbar({darkMode, toggleTheme}: NavbarProps) {
+const navItems = [
+  { href: "#home", label: "Home" },
+  { href: "#about", label: "Sobre" },
+  { href: "#projects", label: "Projetos" },
+  { href: "#skills", label: "Habilidades" },
+  { href: "#contact", label: "Contato" },
+];
+
+export function Navbar({ darkMode, toggleTheme }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
+  const mobileNavigationId = "mobile-navigation";
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -33,6 +42,10 @@ export function Navbar({darkMode, toggleTheme}: NavbarProps) {
     };
   }, []);
 
+  function handleCloseMenu() {
+    setMenuOpen(false);
+  }
+
   return (
     <header
       className={`
@@ -44,60 +57,50 @@ export function Navbar({darkMode, toggleTheme}: NavbarProps) {
       `}
     >
       <div className="container flex items-center justify-between py-4">
-        <h3 className="mx-4 font-bold">Luis Gustavo</h3>
+        <a href="#home" className="mx-4 font-bold text-[var(--text-primary)]">
+          Luis Gustavo
+        </a>
 
-        <nav className="hidden gap-8 md:flex">
-          <a href="#home" className="hover:text-[var(--text-primary)]">
-            Home
-          </a>
-
-          <a href="#about" className="hover:text-[var(--text-primary)]">
-            Sobre
-          </a>
-
-          <a href="#projects" className="hover:text-[var(--text-primary)]">
-            Projetos
-          </a>
-
-          <a href="#skills" className="hover:text-[var(--text-primary)]">
-            Habilidades
-          </a>
-
-          <a href="#contact" className="hover:text-[var(--text-primary)]">
-            Contato
-          </a>
+        <nav aria-label="Navegação principal" className="hidden md:block">
+          <ul className="flex gap-8">
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <a href={item.href} className="hover:text-[var(--text-primary)]">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </nav>
 
-        <span className="flex items-center gap-2">
+        <div className="flex items-center gap-2">
           <ToogleTheme darkTheme={darkMode} onClick={toggleTheme} />
           <BurgerMenu
             darkTheme={darkMode}
+            isOpen={menuOpen}
+            controlsId={mobileNavigationId}
             onClick={() => setMenuOpen((prev) => !prev)}
           />
-        </span>
+        </div>
       </div>
 
-      {menuOpen && (
-        <nav className="border-t border-[var(--border-color)] md:hidden">
-          <div className="flex flex-col gap-4 p-4 items-center">
-            <a href="#home" onClick={() => setMenuOpen(false)}>
-              Home
-            </a>
-            <a href="#about" onClick={() => setMenuOpen(false)}>
-              Sobre
-            </a>
-            <a href="#projects" onClick={() => setMenuOpen(false)}>
-              Projetos
-            </a>
-            <a href="#skills" onClick={() => setMenuOpen(false)}>
-              Habilidades
-            </a>
-            <a href="#contact" onClick={() => setMenuOpen(false)}>
-              Contato
-            </a>
-          </div>
-        </nav>
-      )}
+      <nav
+        id={mobileNavigationId}
+        aria-label="Navegação principal móvel"
+        className={`border-t border-[var(--border-color)] md:hidden ${
+          menuOpen ? "block" : "hidden"
+        }`}
+      >
+        <ul className="flex flex-col gap-4 p-4 items-center">
+          {navItems.map((item) => (
+            <li key={item.href}>
+              <a href={item.href} onClick={handleCloseMenu}>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </header>
   );
 }

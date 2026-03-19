@@ -20,6 +20,7 @@ interface ProjectsProps {
 }
 
 export function Projects({ darkMode }: ProjectsProps) {
+  const carouselId = "projects-carousel";
   const projects: Project[] = [
     {
       video: apgVideo,
@@ -92,7 +93,6 @@ export function Projects({ darkMode }: ProjectsProps) {
   useEffect(() => {
     if (!emblaApi) return;
 
-    onSelect();
     emblaApi.on("select", onSelect);
     emblaApi.on("reInit", onSelect);
 
@@ -105,21 +105,29 @@ export function Projects({ darkMode }: ProjectsProps) {
   return (
     <section
       id="projects"
+      aria-labelledby="projects-title"
       className="w-full bg-[var(--background)] py-8 px-4 pb-14 md:px-8 flex flex-col items-center"
     >
-      <h2 className="py-6">Projetos</h2>
+      <h2 id="projects-title" className="py-6">Projetos</h2>
 
       <div className="flex items-center justify-center gap-4 w-full">
-        <NextButton onClick={scrollPrev} isPrevious />
+        <NextButton onClick={scrollPrev} isPrevious controlsId={carouselId} />
 
-        <div className="w-full max-w-[1200px] overflow-hidden" ref={emblaRef}>
-          <div className="flex">
+        <div
+          id={carouselId}
+          ref={emblaRef}
+          role="region"
+          aria-roledescription="carrossel"
+          aria-label="Carrossel de projetos"
+          className="w-full max-w-[1200px] overflow-hidden"
+        >
+          <ul className="flex">
             {projects.map((project, index) => {
               const isActive = index === selectedIndex;
 
               return (
-                <div
-                  key={index}
+                <li
+                  key={`${project.title}-${index}`}
                   className="min-w-0 flex-[0_0_100%] md:flex-[0_0_50%] px-2 md:px-4"
                 >
                   <div
@@ -140,20 +148,27 @@ export function Projects({ darkMode }: ProjectsProps) {
                       darkMode={darkMode}
                     />
                   </div>
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
 
-        <NextButton onClick={scrollNext} />
+        <NextButton onClick={scrollNext} controlsId={carouselId} />
       </div>
 
-      <div className="dots flex gap-2 justify-center mt-4">
-        {projects.map((_, index) => (
+      <div
+        className="dots flex gap-2 justify-center mt-4"
+        role="group"
+        aria-label="Selecionar projeto"
+      >
+        {projects.map((project, index) => (
           <button
-            key={index}
+            key={`${project.title}-dot-${index}`}
+            type="button"
             onClick={() => scrollTo(index)}
+            aria-label={`Ir para o projeto ${index + 1}: ${project.title}`}
+            aria-pressed={selectedIndex === index}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
               selectedIndex === index
                 ? "bg-blue-600 scale-110"

@@ -88,8 +88,27 @@ body {
 
 }
 
+#root {
+  min-height: 100vh;
+}
+
 html, body{
   overflow-x: hidden;
+}
+
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 16px;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--text-primary);
+  color: var(--surface);
+}
+
+.skip-link:focus {
+  top: 16px;
 }
 
 
@@ -112,7 +131,7 @@ h3 {
   font-weight: 600;
 }
 
-p, input, textarea {
+p, input, textarea, label, small, span {
   color: var(--text-secondary);
   line-height: 1.6;
 }
@@ -143,7 +162,7 @@ p, input, textarea {
 
 a {
   font-size: 1.1rem;
-  color: var(--primary);
+  color: var(--text-primary);
   text-decoration: none;
 }
 
@@ -177,6 +196,14 @@ button:hover {
 
 button:active {
   transform: scale(0.98);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
 }
 
 

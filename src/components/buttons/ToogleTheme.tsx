@@ -11,10 +11,16 @@ export function ToogleTheme({ onClick, darkTheme }: ToogleThemeProps) {
     <button
       type="button"
       onClick={onClick}
-      aria-label="Set Light Theme"
+      aria-label={darkTheme ? "Ativar tema claro" : "Ativar tema escuro"}
+      aria-pressed={darkTheme}
       className="flex items-center justify-center p-2"
     >
-      <img src={darkTheme ? lightIcon : nightIcon } alt="" className={`w-8 h-8 ${darkTheme ? "invert brightness-200" : ""}`} />
+      <img
+        src={darkTheme ? lightIcon : nightIcon}
+        alt=""
+        aria-hidden="true"
+        className={`w-8 h-8 ${darkTheme ? "invert brightness-200" : ""}`}
+      />
     </button>
   );
 }

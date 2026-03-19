@@ -8,7 +8,8 @@ type Props = {
 export function GithubIcon({ darkMode, className }: Props) {
   return (
     <svg
-      role="img"
+      aria-hidden="true"
+      focusable="false"
       viewBox="0 0 24 24"
       className={className ?? "w-5 h-5"}
       fill={darkMode ? "#ffffff" : `#${siGithub.hex}`}

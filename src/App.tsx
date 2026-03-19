@@ -12,23 +12,23 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { darkMode, toggleTheme } = useTheme();
+
   return (
     <>
-    <div className="pt-20 md:pt-0">
       <Navbar darkMode={darkMode} toggleTheme={toggleTheme} />
-      <Hero darkMode={darkMode}/>
-      <About />
-      <Projects darkMode={darkMode}/> 
-      <Skills/> 
-      <Contact darkMode={darkMode}/>
-      <Footer/>
-    </div>
-    <ToastContainer
+      <main id="main-content" className="pt-20 md:pt-0">
+        <Hero darkMode={darkMode} />
+        <About />
+        <Projects darkMode={darkMode} />
+        <Skills />
+        <Contact darkMode={darkMode} />
+      </main>
+      <Footer />
+      <ToastContainer
         position="top-center"
         autoClose={3000}
         theme="colored"
       />
-      
     </>
   )
 }
