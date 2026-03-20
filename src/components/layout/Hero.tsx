@@ -20,7 +20,7 @@ export function Hero({ darkMode }: HeroProps) {
         <ProfilePicture />
 
         <header className="flex flex-col items-center gap-4">
-          <h1 id="hero-title">Luis Gustavo Grando Finger</h1>
+          <h2 id="hero-title">Luis Gustavo Grando Finger</h2>
           <p className="text-xl">Engenheiro de Software</p>
           <p className="text-lg">Desenvolvedor Full-Stack</p>
           <p className="text-base text-center max-w-sm md:max-w-xl px-4 md:px-0">
