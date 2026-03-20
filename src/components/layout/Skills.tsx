@@ -2,7 +2,7 @@ import { SkillsTable } from "../general/SkillsTable";
 
 export function Skills(){
 
-    const skills: string[] = ["React", "TypeScript", "HTML", "CSS", "Python", "Pandas", "AWS", "SQL", "PostgreSQL", "Codex CLI", "Git", "GitHub"];
+    const skills: string[] = ["React", "TypeScript", "Java", "Spring", "HTML", "CSS", "Python", "Pandas", "AWS", "SQL", "PostgreSQL", "Codex CLI", "Git", "GitHub"];
 
     return(
         <section
